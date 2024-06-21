@@ -5,4 +5,9 @@ function getComputerChoice() {
     return compchoice
 }
 
-getComputerChoice()
+function getHumanChoice() {
+    let humanchoice = prompt("Please select rock, paper, or scissors")
+    return humanchoice
+}
+
+console.log(getHumanChoice())
