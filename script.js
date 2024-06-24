@@ -29,20 +29,20 @@ function playRound(humanchoice,compchoice) {
         compobj = "scissors";
 
 
-    let result = 3
+    let result = 0
     if (humanvalue == 3) {
         console.log("Please choose rock, paper, or scissors.")
     }
     else if (humanvalue == compchoice) {
-        result = 2
         console.log("The result is a draw!")}
     else if (humanvalue + 1 == compchoice || humanvalue - 2 == compchoice ) {
         result = 1
         console.log("You lose! " + compobj[0].toUpperCase() +compobj.slice(1) +" beats " + humanchoice[0].toUpperCase() + humanchoice.slice(1)+".") }
     else {
-        result = 0 
+        result = 2 
         console.log("You win! " + humanchoice[0].toUpperCase() +humanchoice.slice(1) +" beats " + compobj[0].toUpperCase() + compobj.slice(1)+".")
     }
+    return result
 }
 
 
@@ -50,4 +50,10 @@ let humanScore = 0;
 let computerScore = 0;
 let humanchoice = getHumanChoice()
 let compchoice = getComputerChoice()
-playRound(humanchoice,compchoice)
+let result = playRound(humanchoice,compchoice)
+if (result == 1) {
+    computerScore = computerScore + 1
+}
+else if (result == 2) {
+    humanScore = humanScore + 1
+}
