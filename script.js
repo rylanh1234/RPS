@@ -46,26 +46,33 @@ function playRound(humanchoice,compchoice) {
     return result
 }
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    for (let round = 1; round <= 5; round++) {
-        let humanchoice = getHumanChoice()
+// function playGame() {
+//     let humanScore = 0;
+//     let computerScore = 0;
+//     for (let round = 1; round <= 5; round++) {
+//         let humanchoice = getHumanChoice()
+//         let compchoice = getComputerChoice()
+//         let result = playRound(humanchoice,compchoice)
+//         if (result == 1) {
+//             computerScore += 1
+//         }
+//         else if (result == 2) {
+//             humanScore += 1
+//         }
+//         else if (result == 3) {
+//             round -= 1
+//         }
+//         console.log("Your score is "+ humanScore)
+//         console.log("The computer's score is "+ computerScore)
+//     }
+
+// }
+const buttons = document.querySelectorAll("button")
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        let playerSelection = button.id
         let compchoice = getComputerChoice()
-        let result = playRound(humanchoice,compchoice)
-        if (result == 1) {
-            computerScore += 1
-        }
-        else if (result == 2) {
-            humanScore += 1
-        }
-        else if (result == 3) {
-            round -= 1
-        }
-        console.log("Your score is "+ humanScore)
-        console.log("The computer's score is "+ computerScore)
-    }
-
-}
-
-playGame()
+        playRound(playerSelection,compchoice)
+});
+});
+// playGame()
