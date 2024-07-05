@@ -30,20 +30,21 @@ function playRound(humanchoice,compchoice) {
 
 
     let result = 0
+    let message = ""
     if (humanvalue == 3) {
         result = 3
-        console.log("Please choose rock, paper, or scissors.")
+        message = "Please choose rock, paper, or scissors."
     }
     else if (humanvalue == compchoice) {
-        console.log("The result is a draw!")}
+        message = "The result is a draw!"}
     else if (humanvalue + 1 == compchoice || humanvalue - 2 == compchoice ) {
         result = 1
-        console.log("You lose! " + compobj[0].toUpperCase() +compobj.slice(1) +" beats " + humanchoice[0].toUpperCase() + humanchoice.slice(1)+".") }
+        message = "You lose! " + compobj[0].toUpperCase() +compobj.slice(1) +" beats " + humanchoice[0].toUpperCase() + humanchoice.slice(1)+"." }
     else {
         result = 2 
-        console.log("You win! " + humanchoice[0].toUpperCase() +humanchoice.slice(1) +" beats " + compobj[0].toUpperCase() + compobj.slice(1)+".")
+        message = "You win! " + humanchoice[0].toUpperCase() +humanchoice.slice(1) +" beats " + compobj[0].toUpperCase() + compobj.slice(1)+"."
     }
-    return result
+    return [result, message];
 }
 
 // function playGame() {
@@ -72,7 +73,15 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         let playerSelection = button.id
         let compchoice = getComputerChoice()
-        playRound(playerSelection,compchoice)
+        const [result, message] = playRound(playerSelection,compchoice)
+        const container = document.querySelector("#resultsContainer");
+        const resultsMessage = document.createElement("div");
+        resultsMessage.classList.add("resultsMessage");
+        resultsMessage.textContent = message;
+        
+        container.appendChild(resultsMessage);
 });
 });
+
+
 // playGame()
