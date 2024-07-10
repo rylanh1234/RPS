@@ -1,6 +1,6 @@
 function getComputerChoice() {
-    let possible = ["rock","paper","scissors"]
-    let randnum = Math.floor(Math.random()*3);
+    let possible = ["rock", "paper", "scissors"]
+    let randnum = Math.floor(Math.random() * 3);
     // let compchoice = possible[randnum]
     // return compchoice
     return randnum
@@ -11,7 +11,7 @@ function getHumanChoice() {
     return humanchoice
 }
 
-function playRound(humanchoice,compchoice) {
+function playRound(humanchoice, compchoice) {
     humanchoice = humanchoice.toLowerCase();
     let humanvalue = 3;
 
@@ -36,13 +36,15 @@ function playRound(humanchoice,compchoice) {
         message = "Please choose rock, paper, or scissors."
     }
     else if (humanvalue == compchoice) {
-        message = "The result is a draw!"}
-    else if (humanvalue + 1 == compchoice || humanvalue - 2 == compchoice ) {
+        message = "The result is a draw!"
+    }
+    else if (humanvalue + 1 == compchoice || humanvalue - 2 == compchoice) {
         result = 1
-        message = "You lose! " + compobj[0].toUpperCase() +compobj.slice(1) +" beats " + humanchoice[0].toUpperCase() + humanchoice.slice(1)+"." }
+        message = "You lose! " + compobj[0].toUpperCase() + compobj.slice(1) + " beats " + humanchoice[0].toUpperCase() + humanchoice.slice(1) + "."
+    }
     else {
-        result = 2 
-        message = "You win! " + humanchoice[0].toUpperCase() +humanchoice.slice(1) +" beats " + compobj[0].toUpperCase() + compobj.slice(1)+"."
+        result = 2
+        message = "You win! " + humanchoice[0].toUpperCase() + humanchoice.slice(1) + " beats " + compobj[0].toUpperCase() + compobj.slice(1) + "."
     }
     return [result, message];
 }
@@ -68,20 +70,49 @@ function playRound(humanchoice,compchoice) {
 //     }
 
 // }
+let humanScore = 0;
+let computerScore = 0;
+let round = 0;
+const resultsContainer = document.querySelector("#resultsContainer");
+const resultsMessage = document.createElement("div");
+const scoreCounter = document.createElement("div");
+resultsMessage.classList.add("resultsMessage");
+scoreCounter.classList.add("scoreCounter")
+resultsContainer.appendChild(resultsMessage);
+resultsContainer.appendChild(scoreCounter)
+
 const buttons = document.querySelectorAll("button")
+
+
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        let playerSelection = button.id
-        let compchoice = getComputerChoice()
-        const [result, message] = playRound(playerSelection,compchoice)
-        const container = document.querySelector("#resultsContainer");
-        const resultsMessage = document.createElement("div");
-        resultsMessage.classList.add("resultsMessage");
-        resultsMessage.textContent = message;
-        
-        container.appendChild(resultsMessage);
-});
-});
+        playerSelection = button.id
+        round += 1;
 
+        if (round <= 5) {
 
+            let compchoice = getComputerChoice()
+            const [result, message] = playRound(playerSelection, compchoice)
+
+            resultsMessage.textContent = message;
+            if (result == 1) {
+                computerScore += 1
+            }
+            else if (result == 2) {
+                humanScore += 1
+            }
+            else if (result == 3) {
+                round -= 1
+            }
+            scoreCounter.textContent = "The score is " + humanScore + " to " + computerScore + "."
+        }
+        else {
+            round = 0;
+            computerScore = 0;
+            humanScore = 0;
+            resultsMessage.textContent = "";
+        }
+
+    });
+});
 // playGame()
