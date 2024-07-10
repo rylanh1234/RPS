@@ -107,10 +107,19 @@ buttons.forEach((button) => {
             scoreCounter.textContent = "The score is " + humanScore + " to " + computerScore + "."
         }
         else {
+            if (humanScore > computerScore) {
+                resultsMessage.textContent = "You are the winner!"
+            }
+            else if (humanScore < computerScore) {
+                resultsMessage.textContent = "The computer is the winner!";
+
+            }
+            else {
+            resultsMessage.textContent = "The match is a draw!";
+            }
             round = 0;
             computerScore = 0;
             humanScore = 0;
-            resultsMessage.textContent = "";
         }
 
     });
